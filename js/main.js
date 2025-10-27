@@ -170,14 +170,22 @@ while (balls.length < 25) {
   balls.push(ball);
 }
 
+let evil = new EvilCircle(100, 100, 20, 20);
+
 function loop() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
   ctx.fillRect(0, 0, width, height);
 
   for (const ball of balls) {
-    ball.draw();
-    ball.update();
-    ball.collisionDetect();
+    if (ball.exists){
+      ball.draw();
+      ball.update();
+      ball.collisionDetect();
+
+      evil.draw();;
+      evil.checkBounds();
+      evil.collisionDetect();
+    }
   }
 
   requestAnimationFrame(loop);
